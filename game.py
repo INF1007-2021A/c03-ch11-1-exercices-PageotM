@@ -10,35 +10,36 @@ import random
 import utils
 
 
-class Weapon:
-	"""
-	Une arme dans le jeu.
+class weapon:
+	name = ""
+	attack = 0
+	lvl_min = 0
+	UNARMED = 20
 
-	:param name: Le nom de l'arme
-	:param power: Le niveau d'attaque
-	:param min_level: Le niveau minimal pour l'utiliser
-	"""
+	def __init__(self,name:str,attack:float,lvl:int):
+		self.name = name
+		self.attack = attack
+		self.lvl_min = lvl
 
-	UNARMED_POWER = 20
+	def make_unarmed(self):
+		self.__init__("unarmed", self.UNARMED, 0)
 
 
 class Character:
-	"""
-	Un personnage dans le jeu
-
-	:param name: Le nom du personnage
-	:param max_hp: HP maximum
-	:param attack: Le niveau d'attaque du personnage
-	:param defense: Le niveau de défense du personnage
-	:param level: Le niveau d'expérience du personnage
-	"""
-
-
+	def __init__(self,name,maxHP,attack,defense,lvl):
+		self.name = name
+		self.maxHP = maxHP
+		self.attack = attack
+		self.defense = defense
+		self.lvl = lvl
+		self.HP = maxHP
+	def changeHP(self,dHP):
+		self.HP = min(max(0,self.HP+dHP),self.maxHP)
 
 def deal_damage(attacker, defender):
-	# TODO: Calculer dégâts
+	damage = attacker.weapon.attack
 	print(f"{attacker.name} used {attacker.weapon.name}")
-	if crit:
+	if random.random() < 0.065:
 		print("  Critical hit!")
 	print(f"  {defender.name} took {damage} dmg")
 
